@@ -13,7 +13,7 @@ pipeline {
 
     stages{
 
-        stage('BUILD'){
+        stage('BUILD-YAW'){
             steps {
                 sh 'mvn clean install -DskipTests'
             }
@@ -25,13 +25,13 @@ pipeline {
             }
         }
 
-        stage('UNIT TEST'){
+        stage('UNIT TEST-NAZ'){
             steps {
                 sh 'mvn test'
             }
         }
 
-        stage('INTEGRATION TEST'){
+        stage('INTEGRATION TEST-YGP'){
             steps {
                 sh 'mvn verify -DskipUnitTests'
             }
@@ -80,7 +80,7 @@ pipeline {
           }
         }
 
-        stage('Upload Image'){
+        stage('Upload Image Prempeh'){
           steps{
             script {
               docker.withRegistry('', registryCredential) {
@@ -97,7 +97,7 @@ pipeline {
           }
         }
 
-        stage('Kubernetes Deploy') {
+        stage('Kubernetes Deploy $') {
           agent {label 'KOPS'}
             steps {
               sh "helm upgrade --install --force vprofile-stack helm/vprofilecharts --set appimage=${registry}:V${BUILD_NUMBER} --namespace prod"
