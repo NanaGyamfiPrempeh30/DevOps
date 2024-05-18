@@ -7,7 +7,7 @@ pipeline {
     }
 */
     environment {
-        registry = "yawgyamfiprem32/kops-dock"
+        registry = "techlearn2024/cicd"
         registryCredential = 'dockerhub'
     }
 
@@ -66,7 +66,7 @@ pipeline {
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                 }
 
-                timeout(time: 30, unit: 'MINUTES') {
+                timeout(time: 10, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
